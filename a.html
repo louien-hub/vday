@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* Define the styling for the draggable element */
+        #draggable {
+            padding: 0;
+            margin: 0;
+            cursor: grab;
+            user-select: none;
+            -moz-user-select: none;
+            -webkit-user-select: none;
+            -ms-user-select: none;
+            touch-action: none;
+            position: absolute;
+            z-index: 1000; /* Ensure it's on top of other elements */
+        }
+        body, html {
+            user-select: none;
+            -moz-user-select: none;
+            -webkit-user-select: none;
+            -ms-user-select: none;
+            margin: 0;
+            padding: 0;
+            height: 100%;
+        }
+        .container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .page2 {
+            padding: 20px;
+            border: 1px solid;
+            transition: border-color 0.5s ease; /* Add transition */
+        }
+        .wrong {
+            border-color: red; /* Set border color to red */
+        }
+        .btn {
+            display: flex;
+            gap: 10px;
+        }
+        #page3 {
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="page2">
+            <span id="draggable">2</span>...
+            <p>Pagmali ka dito, date na tayo!!</p>
+            <p>Ilang taon na ako sa Feb 28?</p>
+            <div class="btn">
+                <input type="button" value="21">
+                <!-- Change the input element to an anchor element -->
+                <div id="page3"><a href="b.html"><input type="button" value="2  "></a></div>
+            </div>
+        </div>
+    </div>
+    
+
+    <!-- <script>
+        // Make the span draggable
+        let draggableElement = document.getElementById('draggable');
+        let offsetX, offsetY, isDown = false;
+
+        draggableElement.addEventListener('mousedown', function(e) {
+            isDown = true;
+            offsetX = e.clientX - draggableElement.getBoundingClientRect().left;
+            offsetY = e.clientY - draggableElement.getBoundingClientRect().top;
+        });
+
+        document.addEventListener('mouseup', function() {
+            isDown = false;
+        });
+
+        document.addEventListener('mousemove', function(e) {
+            if (isDown) {
+                e.preventDefault();
+                draggableElement.style.left = (e.clientX - offsetX) + 'px';
+                draggableElement.style.top = (e.clientY - offsetY) + 'px';
+            }
+        });
+
+        // Get the buttons
+        let button1 = document.querySelector('input[value="21"]');
+        let button2 = document.querySelector('input[value="2  "]');
+        let page2 = document.querySelector('.page2');
+
+        // Add click event listeners to the buttons
+        button1.addEventListener('click', function() {
+            page2.classList.add('wrong'); // Add the wrong class to change border color to red
+            setTimeout(function() {
+                page2.classList.remove('wrong'); // Remove the wrong class after some time to transition back to black
+            }, 1000); // Adjust the time as needed
+        });
+
+        button2.addEventListener('click', function() {
+            page2.classList.add('wrong'); // Add the wrong class to change border color to red
+            setTimeout(function() {
+                page2.classList.remove('wrong'); // Remove the wrong class after some time to transition back to black
+            }, 1000); // Adjust the time as needed
+        });
+    </script> -->
+
+    <script>
+        // Make the span draggable
+        let draggableElement = document.getElementById('draggable');
+        let offsetX, offsetY, isDown = false;
+    
+        draggableElement.addEventListener('mousedown', function(e) {
+            isDown = true;
+            offsetX = e.clientX - draggableElement.getBoundingClientRect().left;
+            offsetY = e.clientY - draggableElement.getBoundingClientRect().top;
+        });
+    
+        document.addEventListener('mouseup', function() {
+            isDown = false;
+            checkDropLocation(); // Check if dropped on #page3 when mouse is lifted
+        });
+    
+        document.addEventListener('mousemove', function(e) {
+            if (isDown) {
+                e.preventDefault();
+                draggableElement.style.left = (e.clientX - offsetX) + 'px';
+                draggableElement.style.top = (e.clientY - offsetY) + 'px';
+            }
+        });
+    
+        // Function to check if draggable element is dropped on #page3
+        function checkDropLocation() {
+            let page3 = document.getElementById('page3');
+            let rect = page3.getBoundingClientRect();
+            let draggableRect = draggableElement.getBoundingClientRect();
+    
+            if (
+                draggableRect.left > rect.left &&
+                draggableRect.right < rect.right &&
+                draggableRect.top > rect.top &&
+                draggableRect.bottom < rect.bottom
+            ) {
+                // If draggable is dropped on #page3, change href attribute of button
+                document.querySelector('input[value="2  "]').parentNode.setAttribute('href', 'b.html');
+            } else {
+                // If not dropped on #page3, remove href attribute
+                document.querySelector('input[value="2  "]').parentNode.removeAttribute('href');
+            }
+        }
+    
+        // Get the buttons
+        let button1 = document.querySelector('input[value="21"]');
+        let button2 = document.querySelector('input[value="2  "]');
+        let page2 = document.querySelector('.page2');
+    
+        // Add click event listeners to the buttons
+        button1.addEventListener('click', function() {
+            page2.classList.add('wrong'); // Add the wrong class to change border color to red
+            setTimeout(function() {
+                page2.classList.remove('wrong'); // Remove the wrong class after some time to transition back to black
+            }, 1000); // Adjust the time as needed
+        });
+    
+        button2.addEventListener('click', function() {
+            page2.classList.add('wrong'); // Add the wrong class to change border color to red
+            setTimeout(function() {
+                page2.classList.remove('wrong'); // Remove the wrong class after some time to transition back to black
+            }, 1000); // Adjust the time as needed
+        });
+    </script>
+    
+    
+</body>
+</html>

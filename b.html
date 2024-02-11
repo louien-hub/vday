@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="assets/captcha.css">
+</head>
+<body>
+    <div class="container">
+        <p>Again, Can you be my Valentine date?</p>
+        <div class="captcha">
+            <div id="blocking"></div>
+            <input disabled type="checkbox" id="captchaCheckbox">
+            <label for="captchaCheckbox">I'm not a Robot</label>
+            <div class="logo">
+                <img src="assets/logo.png" alt=""><br>
+                <span>where'sCAPTCHA</span><br>
+                <span>Privacy - Terms</span>
+            </div>
+        </div>
+        <div class="btn">
+            <input disabled type="button" value="Yes">
+            <input disabled type="button" value="No">
+        </div>
+        <div style="display: none;" class="msg" id="message1">
+            YES!! THANK YOU BB, I LOVE YOU! SEE YOU!! 😍
+        </div>
+        <div style="display: none;" class="msg" id="message2">
+            SAY YES, PLEASEEEEEEEEEE!! 🥀
+        </div>
+    </div>
+
+<!-- 
+    <script>
+        const blocking = document.getElementById('blocking');
+        const captcha = document.querySelector('.captcha');
+        const checkbox = document.getElementById('captchaCheckbox');
+
+        let offsetX, offsetY, isDragging = false;
+
+        blocking.addEventListener('mousedown', startDragging);
+        document.addEventListener('mousemove', drag);
+        document.addEventListener('mouseup', stopDragging);
+
+        function startDragging(e) {
+            isDragging = true;
+            offsetX = e.offsetX;
+            offsetY = e.offsetY;
+        }
+
+        function drag(e) {
+            if (isDragging) {
+                blocking.style.left = e.pageX - offsetX + 'px';
+                blocking.style.top = e.pageY - offsetY + 'px';
+                checkBlockingPosition();
+            }
+        }
+
+        function stopDragging() {
+            isDragging = false;
+        }
+
+        function checkBlockingPosition() {
+            const captchaRect = captcha.getBoundingClientRect();
+            const blockingRect = blocking.getBoundingClientRect();
+            
+            if (
+                blockingRect.right < captchaRect.left ||
+                blockingRect.left > captchaRect.right ||
+                blockingRect.bottom < captchaRect.top ||
+                blockingRect.top > captchaRect.bottom
+            ) {
+                checkbox.disabled = false;
+            } else {
+                checkbox.disabled = true;
+            }
+        }
+        function drag(e) {
+            if (isDragging) {
+                const boundingRect = captcha.getBoundingClientRect();
+                const viewportOffsetX = boundingRect.left + window.pageXOffset;
+                const viewportOffsetY = boundingRect.top + window.pageYOffset;
+                
+                blocking.style.left = e.pageX - offsetX - viewportOffsetX + 'px';
+                blocking.style.top = e.pageY - offsetY - viewportOffsetY + 'px';
+                checkBlockingPosition();
+            }
+        }
+
+    </script> -->
+<!-- 
+    <script>
+        const blocking = document.getElementById('blocking');
+        const captcha = document.querySelector('.captcha');
+        const checkbox = document.getElementById('captchaCheckbox');
+        const noButton = document.querySelector('.btn input[type="button"][value="No"]');
+        
+        const yesButton = document.querySelector('.btn input[type="button"][value="Yes"]');
+    
+        let offsetX, offsetY, isDragging = false;
+    
+        blocking.addEventListener('mousedown', startDragging);
+        document.addEventListener('mousemove', drag);
+        document.addEventListener('mouseup', stopDragging);
+    
+        checkbox.addEventListener('change', handleCheckboxChange);
+    
+        function startDragging(e) {
+            isDragging = true;
+            offsetX = e.offsetX;
+            offsetY = e.offsetY;
+        }
+    
+        function drag(e) {
+            if (isDragging) {
+                const boundingRect = captcha.getBoundingClientRect();
+                const viewportOffsetX = boundingRect.left + window.pageXOffset;
+                const viewportOffsetY = boundingRect.top + window.pageYOffset;
+    
+                blocking.style.left = e.pageX - offsetX - viewportOffsetX + 'px';
+                blocking.style.top = e.pageY - offsetY - viewportOffsetY + 'px';
+                checkBlockingPosition();
+            }
+        }
+    
+        function stopDragging() {
+            isDragging = false;
+        }
+    
+        function checkBlockingPosition() {
+            const captchaRect = captcha.getBoundingClientRect();
+            const blockingRect = blocking.getBoundingClientRect();
+    
+            if (
+                blockingRect.right < captchaRect.left ||
+                blockingRect.left > captchaRect.right ||
+                blockingRect.bottom < captchaRect.top ||
+                blockingRect.top > captchaRect.bottom
+            ) {
+                checkbox.disabled = false;
+            } else {
+                checkbox.disabled = true;
+            }
+        }
+    
+        function handleCheckboxChange() {
+            if (checkbox.checked) {
+                noButton.disabled = false;
+                yesButton.disabled = false;
+            } else {
+                noButton.disabled = true;
+                yesButton.disabled = true;
+            }
+        }
+    </script> -->
+
+    <script>
+        const blocking = document.getElementById('blocking');
+        const captcha = document.querySelector('.captcha');
+        const checkbox = document.getElementById('captchaCheckbox');
+        const noButton = document.querySelector('.btn input[type="button"][value="No"]');
+        const yesButton = document.querySelector('.btn input[type="button"][value="Yes"]');
+        const message1 = document.getElementById('message1');
+        const message2 = document.getElementById('message2');
+    
+        let offsetX, offsetY, isDragging = false;
+    
+        blocking.addEventListener('mousedown', startDragging);
+        document.addEventListener('mousemove', drag);
+        document.addEventListener('mouseup', stopDragging);
+    
+        checkbox.addEventListener('change', handleCheckboxChange);
+        noButton.addEventListener('click', handleNoButtonClick);
+        yesButton.addEventListener('click', handleYesButtonClick);
+    
+        function startDragging(e) {
+            isDragging = true;
+            offsetX = e.offsetX;
+            offsetY = e.offsetY;
+        }
+    
+        function drag(e) {
+            if (isDragging) {
+                const boundingRect = captcha.getBoundingClientRect();
+                const viewportOffsetX = boundingRect.left + window.pageXOffset;
+                const viewportOffsetY = boundingRect.top + window.pageYOffset;
+    
+                blocking.style.left = e.pageX - offsetX - viewportOffsetX + 'px';
+                blocking.style.top = e.pageY - offsetY - viewportOffsetY + 'px';
+                checkBlockingPosition();
+            }
+        }
+    
+        function stopDragging() {
+            isDragging = false;
+        }
+    
+        function checkBlockingPosition() {
+            const captchaRect = captcha.getBoundingClientRect();
+            const blockingRect = blocking.getBoundingClientRect();
+    
+            if (
+                blockingRect.right < captchaRect.left ||
+                blockingRect.left > captchaRect.right ||
+                blockingRect.bottom < captchaRect.top ||
+                blockingRect.top > captchaRect.bottom
+            ) {
+                checkbox.disabled = false;
+            } else {
+                checkbox.disabled = true;
+            }
+        }
+    
+        function handleCheckboxChange() {
+            if (checkbox.checked) {
+                noButton.disabled = false;
+                yesButton.disabled = false;
+            } else {
+                noButton.disabled = true;
+                yesButton.disabled = true;
+            }
+        }
+    
+        function handleNoButtonClick() {
+            message1.style.display = 'none';
+            message2.style.display = 'block';
+        }
+    
+        function handleYesButtonClick() {
+            message1.style.display = 'block';
+            message2.style.display = 'none';
+        }
+    </script>
+    
+    
+</body>
+</html>

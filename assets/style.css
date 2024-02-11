@@ -1,0 +1,23 @@
+body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+}
+
+.container {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Centers horizontally */
+}
+
+.page1 {
+    padding: 20px;
+    border: 1px solid;
+}
+
+#noButton {
+    transition: left 0.1s ease, top 0.1s ease;
+}
+
+
